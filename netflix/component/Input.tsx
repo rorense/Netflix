@@ -12,7 +12,7 @@ function Input() {
             w-full
             text-md
             text-white
-            bg-neutral-700
+            bg-zinc-700
             appearance-none
             focus:outline-none
             focus:ring-0
