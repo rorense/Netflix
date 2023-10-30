@@ -4,6 +4,7 @@ import prismadb from '@/lib/prismadb';
 import { compare } from 'bcrypt';
 
 export default NextAuth({
+    // Custom providers
     providers: [
         Credentials({
             id: 'credentials',
@@ -49,4 +50,8 @@ export default NextAuth({
     session: {
         strategy: 'jwt',
     },
+    jwt: {
+        secret: process.env.NEXTAUTH_JWT_SECRET
+    },
+    secret: process.env.NEXTAUTH_SECRET
 })
