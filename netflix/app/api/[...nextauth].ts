@@ -1,6 +1,6 @@
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
-import prismadb from '@/lib/prismadb';
+import prismadb from '@/libs/prismadb';
 import { compare } from 'bcrypt';
 
 export default NextAuth({
@@ -8,7 +8,7 @@ export default NextAuth({
     providers: [
         Credentials({
             id: 'credentials',
-            name: 'credentials',
+            name: 'Credentials',
             credentials: {
                 email: {
                     label: 'Email',
@@ -23,6 +23,7 @@ export default NextAuth({
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error('Email and password required');
                 }
+                
                 const user = await prismadb.user.findUnique({
                     where: {
                         email: credentials.email
@@ -46,7 +47,7 @@ export default NextAuth({
     pages: {
         signIn: '/auth',
     },
-    debug: process.env.NODE_ENV == 'development',
+    debug: process.env.NODE_ENV === 'development',
     session: {
         strategy: 'jwt',
     },

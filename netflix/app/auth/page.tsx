@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function Auth() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
   // A state for toggling login and signup state
@@ -16,17 +16,18 @@ export default function Auth() {
     setVariant((currentvariant) => currentvariant == 'login' ? 'register': 'login')
   }, [])
 
+  // callback function for registering user
   const register = useCallback(async() => {
     try {
       await axios.post('/api/register', {
         email,
         name,
-        password
-      })
+        password,
+      });
     } catch (error) {
-      console.log(error)
+        console.log(error)
     }
-  }, [email, name, password])
+  }, [email, name, password]);
 
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
@@ -43,9 +44,9 @@ export default function Auth() {
               {variant == 'register' && (
               <Input 
                 label='Username' 
-                onChange={(e: any) => setUsername(e.target.value)} 
-                id='username'
-                value={username}  />
+                onChange={(e: any) => setName(e.target.value)} 
+                id='name'
+                value={name}  />
               )}
 
               <Input 
@@ -61,7 +62,7 @@ export default function Auth() {
                 value={password}
                 type='password'  />
             </div>
-            <button className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition' onClick={register}>
+            <button onClick={register} className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition' >
               {variant == 'login' ? 'Login' : 'Sign Up'}
             </button>
             <p className='text-neutral-500 mt-12 text-sm'>
