@@ -9,3 +9,4 @@ This is a working netflix clone with the following tech stacks:
 - MongoDB
 - NextAuth
 - Axios
+- React Icons
